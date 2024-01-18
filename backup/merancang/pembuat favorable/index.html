@@ -1,0 +1,54 @@
+---
+---
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Pembuat Favorable - 081545143654</title>
+	<meta charset="utf-8">
+	{% include hta.html %}
+	<style type="text/css">
+		{% include bootstrap.min.css %}
+		/*td {
+			vertical-align: top;
+		}*/
+		.col-sm-6 {
+			width: 50%;
+			float: left;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<br>
+		<div class="row clearfix">
+			<div class="col-sm-6">
+				<div class="form-group">
+					<label for="">Data</label>
+					<textarea name="" id="" cols="30" rows="10" class="form-control data masuk"></textarea>
+				</div>
+				<div class="form-group">
+					<label for="">Jumlah Pilihan Jawaban</label>
+					<input type="text" class="form-control pilihan-jawaban masuk">
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<div class="form-group">
+					<label for="">Hasil</label>
+					<textarea name="" id="" cols="30" rows="10" class="form-control hasil" readonly=""></textarea>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		{% include jquery.min.js %}
+		$('.masuk').on('keyup', function(){
+			pengurang = Number($('.pilihan-jawaban').val()) + 1
+			hasil = $('.data').val().replace(/(\d)/g, function(x){
+				return pengurang - Number(x)
+			})
+			$('.hasil').val(hasil)
+		})
+	</script>
+</body>
+</html>

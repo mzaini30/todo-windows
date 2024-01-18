@@ -1,0 +1,43 @@
+---
+---
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Pisah Satuan - 081545143654</title>
+	<meta charset="utf-8">
+	{% include hta.html %}
+	<style>
+		{% include bootstrap.min.css %}
+		.col-sm-6 {
+			float: left;
+			width: 50%;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<br>
+		<div class="clearfix row">
+			<div class="col-sm-6">
+				<div class="form-group">
+					<label for="">Input</label>
+					<input type="text" class="form-control input">
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<div class="form-group">
+					<label for="">Output</label>
+					<input type="text" class="form-control output" readonly="">
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		{% include jquery.min.js %}
+		$('.input').on('keyup', function(){
+			$('.output').val($(this).val().replace(/(.)/g, '$1\t'))
+		})
+	</script>
+</body>
+</html>
