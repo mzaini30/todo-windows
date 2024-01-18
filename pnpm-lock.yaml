@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  beast-orm:
+    specifier: ^1.1.5
+    version: 1.1.5
   svelte-spa-router:
     specifier: ^4.0.1
     version: 4.0.1
@@ -590,6 +593,10 @@ packages:
   /balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
     dev: true
+
+  /beast-orm@1.1.5:
+    resolution: {integrity: sha512-/ubSO+8pp5NhW+AnK+sNaPXyyieHRuRNLxNUXhtMeJRZYbhyGLa5iH4hGP1hrB27Ximt+MnySWva2ct6dFP+aA==}
+    dev: false
 
   /binary-extensions@2.2.0:
     resolution: {integrity: sha512-jDctJ/IVQbZoJykoeHbhXpOlNBqGNcwXJKJog42E5HDPUwQTSdjCHdihjj0DlnheQ7blbT6dHOafNAiS8ooQKA==}
