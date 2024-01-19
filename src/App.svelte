@@ -9,38 +9,30 @@
     Checkbox,
     A,
   } from "flowbite-svelte";
-  import { Todo } from "./database";
-  import { models } from "beast-orm";
 
   let data = [];
   let tambahBaru = "";
 
-  async function menambahBaru() {
-    const menambah = await Todo.create({ todonya: tambahBaru, isDone: false });
+  if (localStorage.data) {
+    data = JSON.parse(localStorage.data);
+  }
+
+  function menambahBaru() {
+    data = [...data, { id: Date.now(), todonya: tambahBaru, isDone: false }];
     tambahBaru = "";
-    if (menambah) {
-      init();
-    }
+    localStorage.data = JSON.stringify(data);
   }
 
-  async function ubahMenjadi(id, status) {
-    const ubah = await Todo.filter({ id }).update({ isDone: status });
-    if (ubah) {
-      init();
-    }
+  function ubahMenjadi(id, isDone) {
+    data = data.map((item) => {
+      if (item.id == id) {
+        return { ...item, isDone };
+      } else {
+        return item;
+      }
+    });
+    localStorage.data = JSON.stringify(data);
   }
-
-  models.register({
-    databaseName: "todo",
-    version: 1,
-    type: "indexedDB",
-    models: [Todo],
-  });
-
-  async function init() {
-    data = await Todo.all();
-  }
-  init();
 </script>
 
 <svelte:head>
