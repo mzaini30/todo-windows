@@ -1,3 +1,0 @@
-[submodule "src/localstorage-orm"]
-	path = src/localstorage-orm
-	url = git@github.com:mzaini30/localstorage-orm.git
