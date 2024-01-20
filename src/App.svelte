@@ -9,40 +9,36 @@
     Checkbox,
     A,
   } from "flowbite-svelte";
+  import { Orm } from "./localstorage-orm";
 
-  let data = [];
   let tambahBaru = "";
-
-  if (localStorage.data) {
-    data = JSON.parse(localStorage.data);
+  let database = { todo: [] };
+  if (localStorage.database) {
+    database = JSON.parse(localStorage.database);
   }
 
-  function menambahBaru() {
-    data = [...data, { id: Date.now(), todonya: tambahBaru, isDone: false }];
-    tambahBaru = "";
-    localStorage.data = JSON.stringify(data);
-  }
-
-  function ubahMenjadi(id, isDone) {
-    data = data.map((item) => {
-      if (item.id == id) {
-        return { ...item, isDone };
-      } else {
-        return item;
-      }
-    });
-    localStorage.data = JSON.stringify(data);
+  function ubah(id, isDone) {
+    database = new Orm(database).update("todo", id, { isDone }).done();
+    localStorage.database = JSON.stringify(database);
   }
 </script>
 
 <svelte:head>
-  <title>TODO</title>
+  <title>database</title>
 </svelte:head>
 
-<form on:submit|preventDefault={menambahBaru}>
+<form
+  on:submit|preventDefault={() => {
+    database = new Orm(database)
+      .insert("todo", { todonya: tambahBaru, isDone: false })
+      .done();
+    localStorage.database = JSON.stringify(database);
+    tambahBaru = "";
+  }}
+>
   <div class="p-4 pb-0">
     <div>
-      <Label for="first_name" class="mb-2">TODO Baru</Label>
+      <Label for="first_name" class="mb-2">database Baru</Label>
       <Input
         type="text"
         id="first_name"
@@ -62,10 +58,10 @@
       >
         Belum Selesai
       </h5>
-      {#each data as item}
+      {#each database.todo as item}
         {#if item.isDone == false}
           <div class="mb-3">
-            <Toggle checked={false} on:click={() => ubahMenjadi(item.id, true)}
+            <Toggle checked={false} on:click={() => ubah(item.id, true)}
               >{item.todonya}</Toggle
             >
           </div>
@@ -78,10 +74,10 @@
       >
         Sudah Selesai
       </h5>
-      {#each data as item}
+      {#each database.todo as item}
         {#if item.isDone == true}
           <div class="mb-3">
-            <Toggle checked={true} on:click={() => ubahMenjadi(item.id, false)}
+            <Toggle checked={true} on:click={() => ubah(item.id, false)}
               >{item.todonya}</Toggle
             >
           </div>
