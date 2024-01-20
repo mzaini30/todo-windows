@@ -38,7 +38,7 @@
 >
   <div class="p-4 pb-0">
     <div>
-      <Label for="first_name" class="mb-2">database Baru</Label>
+      <Label for="first_name" class="mb-2">TODO Baru</Label>
       <Input
         type="text"
         id="first_name"
