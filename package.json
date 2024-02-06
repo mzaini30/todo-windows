@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && cp ./START.exe ./dist/START.exe",
+    "build:windows": "vite build && cp ./START.exe ./dist/START.exe",
+    "build": "vite build",
     "preview": "vite preview"
   },
   "devDependencies": {
